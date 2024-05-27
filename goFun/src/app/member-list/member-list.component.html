@@ -1,0 +1,49 @@
+<div>
+  <h2>Member List</h2>
+  <ul>
+    <li *ngFor="let member of members">
+      {{ member.name }} ({{ member.email }})
+      <button (click)="editMember(member)">Edit</button>
+      <button (click)="deleteMember(member.id)">Delete</button>
+    </li>
+  </ul>
+
+  <div *ngIf="selectedMember">
+    <h3>Edit Member</h3>
+    <form (ngSubmit)="updateMember()">
+      <label>
+        Name:
+        <input [(ngModel)]="selectedMember.name" name="name" />
+      </label>
+      <label>
+        Email:
+        <input [(ngModel)]="selectedMember.email" name="email" />
+      </label>
+      <label>
+        Password:
+        <input [(ngModel)]="selectedMember.password" name="password" type="password" />
+      </label>
+      <button type="submit">Update</button>
+      <button type="button" (click)="cancelEdit()">Cancel</button>
+    </form>
+  </div>
+
+  <div *ngIf="!selectedMember">
+    <h3>Create New Member</h3>
+    <form (ngSubmit)="createMember()">
+      <label>
+        Name:
+        <input [(ngModel)]="newMember.name" name="name" />
+      </label>
+      <label>
+        Email:
+        <input [(ngModel)]="newMember.email" name="email" />
+      </label>
+      <label>
+        Password:
+        <input [(ngModel)]="newMember.password" name="password" type="password" />
+      </label>
+      <button type="submit">Create</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="container mt-5">
+    
+    <h2>行程列表</h2>
+  <button class="btn btn-primary mb-3" (click)="newItinerary = {'name':''}">新增行程</button>
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title">添加現有行程</h5>
+      <form (ngSubmit)="addExistingItinerary()">
+        <div class="mb-3">
+          <label for="itinerary-id" class="form-label">行程ID</label>
+          <input type="number" class="form-control" id="itinerary-id" [(ngModel)]="itineraryIdToAdd" name="itinerary-id" required>
+        </div>
+        <button type="submit" class="btn btn-primary">添加</button>
+      </form>
+    </div>
+  </div>
+
+  <div *ngIf="newItinerary.name !== undefined" class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title">新增行程</h5>
+      <form (ngSubmit)="addItinerary()">
+        <div class="mb-3">
+          <label for="name" class="form-label">行程名稱</label>
+          <input type="text" class="form-control" id="name" [(ngModel)]="newItinerary.name" name="name" required>
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">行程敘述</label>
+          <input type="text" class="form-control" id="description" [(ngModel)]="newItinerary.description" name="description" required>
+        </div>
+        <div class="mb-3">
+          <label for="days" class="form-label">行程天數</label>
+          <input type="number" class="form-control" id="days" [(ngModel)]="newItinerary.days" name="days" required>
+        </div>
+        <button type="submit" class="btn btn-success">保存</button>
+        <button type="button" class="btn btn-secondary" (click)="newItinerary = {}">取消</button>
+      </form>
+    </div>
+  </div>
+
+  <div *ngFor="let itinerary of itineraries" class="card mb-3">
+    <div class="card-body" style="background-color: rgb(83, 136, 167);">
+      <h5 class="card-title">行程名稱 : {{ itinerary.name }}</h5>
+      <p class="card-text">行程敘述 : {{ itinerary.description }}</p>
+      <p class="card-text">行程天數 : {{ itinerary.days }}</p>
+      <button class="btn btn-primary" >查看事件</button>
+      <button class="btn btn-danger" (click)="deleteItinerary(itinerary.id)">刪除行程</button>
+    </div>
+</div>
