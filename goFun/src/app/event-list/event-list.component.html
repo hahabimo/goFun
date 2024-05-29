@@ -1,15 +1,53 @@
-<!-- <div class="container mt-5">
-    <h2>{{ itinerary.name }}的事件</h2>
-    <button class="btn btn-primary mb-3" (click)="addEvent()">新增事件</button>
-    
-    <div *ngFor="let event of events" class="card mb-3">
+<div class="container mt-5">
+  <div class="row mb-4">
+    <div class="col text-center">
+      <h1 class="display-4">行程事件</h1>
+    </div>
+  </div>
+  <div class="row mb-4">
+    <div class="col text-start">
+      <button class="btn btn-outline-primary" (click)="showAddEventForm()">新增事件</button>
+      <button class="btn btn-outline-secondary" (click)="goBack()">返回上一頁</button>
+    </div>
+  </div>
+
+  <div *ngIf="isAddEventFormVisible" class="mb-4">
+    <div class="card">
       <div class="card-body">
-        <h5 class="card-title">{{ event.name }}</h5>
-        <p class="card-text">{{ event.description }}</p>
-        <p class="card-text">開始日期: {{ event.startDate }}</p>
-        <p class="card-text">結束日期: {{ event.endDate }}</p>
-        <button class="btn btn-secondary" (click)="updateEvent(event)">編輯事件</button>
-        <button class="btn btn-danger" (click)="deleteEvent(event.id)">刪除事件</button>
+        <h5 class="card-title">新增事件</h5>
+        <form (ngSubmit)="addEvent()">
+          <div class="mb-3">
+            <label for="eventName" class="form-label">事件名稱</label>
+            <input type="text" class="form-control" id="eventName" [(ngModel)]="newEvent.name" name="eventName" required>
+          </div>
+          <div class="mb-3">
+            <label for="eventDay" class="form-label">第幾天</label>
+            <input type="number" class="form-control" id="eventDay" [(ngModel)]="newEvent.belongDay" name="eventDay" min="1" [max]="itineraryDays" required>
+          </div>
+          <div class="mb-3">
+            <label for="eventDescription" class="form-label">事件敘述</label>
+            <textarea class="form-control" id="eventDescription" [(ngModel)]="newEvent.description" name="eventDescription" rows="3" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">保存</button>
+          <button type="button" class="btn btn-secondary" (click)="hideAddEventForm()">取消</button>
+        </form>
       </div>
     </div>
-  </div> -->
+  </div>
+
+  <div *ngFor="let day of [].constructor(itineraryDays); let dayIndex = index" class="mb-4">
+    <div class="card">
+      <div class="card-header">
+        第 {{ dayIndex + 1 }} 天
+      </div>
+      <div class="card-body">
+        <div *ngFor="let event of groupedEvents[dayIndex + 1]" class="mb-3">
+          <h5>{{ event.name }}</h5>
+          <p>{{ event.description }}</p>
+          <button class="btn btn-secondary" (click)="updateEvent(event)">編輯</button>
+          <button class="btn btn-danger" (click)="deleteEvent(event.id)">刪除</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

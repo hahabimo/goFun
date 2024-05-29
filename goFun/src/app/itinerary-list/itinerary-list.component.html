@@ -1,17 +1,23 @@
 <div class="container mt-5">
-    
-    <h2>行程列表</h2>
-  <button class="btn btn-primary mb-3" (click)="newItinerary = {'name':''}">新增行程</button>
-  <div class="card mb-3">
-    <div class="card-body">
-      <h5 class="card-title">添加現有行程</h5>
-      <form (ngSubmit)="addExistingItinerary()">
-        <div class="mb-3">
-          <label for="itinerary-id" class="form-label">行程ID</label>
-          <input type="number" class="form-control" id="itinerary-id" [(ngModel)]="itineraryIdToAdd" name="itinerary-id" required>
+  <h2 class="mb-4">行程列表</h2>
+  
+  <div class="row mb-3">
+    <div class="col-md-auto mb-2 mb-md-0">
+      <button class="btn btn-primary w-100" (click)="newItinerary = {'name':''}">新增行程</button>
+    </div>
+    <div class="col-md">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">添加現有行程</h5>
+          <form (ngSubmit)="addExistingItinerary()">
+            <div class="mb-3">
+              <label for="itinerary-id" class="form-label">行程ID</label>
+              <input type="number" class="form-control" id="itinerary-id" [(ngModel)]="itineraryIdToAdd" name="itinerary-id" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">添加</button>
+          </form>
         </div>
-        <button type="submit" class="btn btn-primary">添加</button>
-      </form>
+      </div>
     </div>
   </div>
 
@@ -31,18 +37,23 @@
           <label for="days" class="form-label">行程天數</label>
           <input type="number" class="form-control" id="days" [(ngModel)]="newItinerary.days" name="days" required>
         </div>
-        <button type="submit" class="btn btn-success">保存</button>
+        <button type="submit" class="btn btn-success me-2">保存</button>
         <button type="button" class="btn btn-secondary" (click)="newItinerary = {}">取消</button>
       </form>
     </div>
   </div>
 
-  <div *ngFor="let itinerary of itineraries" class="card mb-3">
-    <div class="card-body" style="background-color: rgb(83, 136, 167);">
-      <h5 class="card-title">行程名稱 : {{ itinerary.name }}</h5>
-      <p class="card-text">行程敘述 : {{ itinerary.description }}</p>
-      <p class="card-text">行程天數 : {{ itinerary.days }}</p>
-      <button class="btn btn-primary" >查看事件</button>
-      <button class="btn btn-danger" (click)="deleteItinerary(itinerary.id)">刪除行程</button>
+  <div class="row">
+    <div *ngFor="let itinerary of itineraries" class="col-lg-3 col-md-6 mb-3">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">行程名稱 : {{ itinerary.name }}</h5>
+          <p class="card-text">行程敘述 : {{ itinerary.description }}</p>
+          <p class="card-text">行程天數 : {{ itinerary.days }}</p>
+          <button class="btn btn-primary me-2" (click)="viewEvents(itinerary)">查看事件</button>
+          <button class="btn btn-danger" (click)="deleteItinerary(itinerary.id)">刪除行程</button>
+        </div>
+      </div>
     </div>
+  </div>
 </div>

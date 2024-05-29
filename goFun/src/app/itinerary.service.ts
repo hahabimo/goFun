@@ -16,6 +16,7 @@ export class ItineraryService {
   }
 
   createItinerary(itinerary: Itinerary): Observable<Itinerary> {
+    console.log(itinerary);
     return this.http.post<Itinerary>(this.baseUrl, itinerary, this.getHttpOptions());
   }
 

@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'todos', component: TodoListComponent },
   { path: 'itineraries', component: ItineraryListComponent },
-  { path: 'itinerary/:id/events', component: EventListComponent },
+  { path: 'itinerary/:id/events/:days', component: EventListComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' } // 默认导航到登录页面
 ];
 

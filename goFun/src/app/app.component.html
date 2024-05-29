@@ -1,6 +1,22 @@
-<div>
-  <h1>{{ title }}</h1>
-  <!-- app.component.html -->
-  <button (click)="logout()">Logout</button>
-  <router-outlet></router-outlet>
+<div class="container mt-5">
+  <div class="row mb-4">
+    <div class="col text-center">
+      <h1 class="display-4">{{ title }}</h1>
+    </div>
+  </div>
+  <div class="row mb-4">
+    <div class="col text-start">
+      <button *ngIf="!isLoggedIn()" class="btn btn-outline-primary" (click)="navigateToRegister()">
+        <i class="bi bi-pencil-square"></i> Register
+      </button>
+    </div>
+    <div class="col text-end">
+      <button *ngIf="isLoggedIn()" class="btn btn-outline-danger" (click)="logout()">
+        <i class="bi bi-box-arrow-right"></i> Logout
+      </button>
+    </div>
+  </div>
+  <div class="card-body">
+    <router-outlet></router-outlet>
+  </div>
 </div>

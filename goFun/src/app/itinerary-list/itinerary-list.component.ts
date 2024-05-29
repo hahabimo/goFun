@@ -17,7 +17,9 @@ export class ItineraryListComponent implements OnInit {
   newItinerary: Partial<Itinerary> = {};
   itineraryIdToAdd: number | null = null; // 新增行程的ID
 
-  constructor(private itineraryService: ItineraryService, private router: Router) { }
+  constructor(
+    private itineraryService: ItineraryService,
+    private router: Router ) { }
 
   ngOnInit() {
     this.loadItineraries();
@@ -31,6 +33,7 @@ export class ItineraryListComponent implements OnInit {
     this.itineraryService.createItinerary(this.newItinerary as Itinerary).subscribe(itinerary => {
       this.itineraries.push(itinerary);
     });
+    this.newItinerary = {};
   }
 
   updateItinerary(itinerary: Itinerary) {
@@ -56,4 +59,10 @@ export class ItineraryListComponent implements OnInit {
       });
     }
   }
+
+  viewEvents(itinerary: Itinerary) {
+    this.router.navigate(['/itinerary', itinerary.id, 'events', itinerary.days]);
+  }
+
+  
 }
