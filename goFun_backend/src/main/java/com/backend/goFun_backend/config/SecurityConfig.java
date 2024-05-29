@@ -43,10 +43,11 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/members/login", "/members/register").permitAll()
-                .requestMatchers("/h2-console/**").permitAll()
-                .requestMatchers("/todos/**","/itineraries/**").authenticated()
-                .anyRequest().authenticated()
+//                .requestMatchers("/members/login", "/members/register").permitAll()
+//                .requestMatchers("/h2-console/**").permitAll()
+//                .requestMatchers("/todos/**","/itineraries/**").authenticated()
+//                .anyRequest().authenticated()
+                .anyRequest().permitAll()
             )
             .headers(headers -> headers.frameOptions(FrameOptionsConfig::sameOrigin))// 允许iframe显示H2控制台
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

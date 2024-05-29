@@ -6,5 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface ItineraryRepository extends CrudRepository<Itinerary, Integer> {
 
-    List<Itinerary> findByMember(Member member);
+    List<Itinerary> findByMembers(Member members);
 }

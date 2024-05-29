@@ -1,7 +1,12 @@
 package com.backend.goFun_backend.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -9,6 +14,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
@@ -16,32 +22,32 @@ import jakarta.persistence.OneToMany;
 public class Itinerary {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     private String name;
     private String description;
     private int days;
     
-    @ManyToOne
-    @JoinColumn(name = "member_id")
-    private Member member;
+    @ManyToMany(mappedBy = "itineraries")
+    private Set<Member> members = new HashSet<>();
+    
+    @OneToMany(mappedBy = "itinerary")
+    @JsonManagedReference
+    private Set<Events> events = new HashSet<>();
 
-	public Member getMember() {
-		return member;
+	public Set<Member> getMembers() {
+		return members;
 	}
 
-	public void setMember(Member member) {
-		this.member = member;
+	public void setMembers(Set<Member> members) {
+		this.members = members;
 	}
 
-//	@OneToMany(mappedBy = "itinerary", cascade = CascadeType.ALL)
-//    private List<Event> events = new ArrayList<>();
-
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -68,14 +74,5 @@ public class Itinerary {
 	public void setDays(int days) {
 		this.days = days;
 	}
-
-//	public List<Event> getEvents() {
-//		return events;
-//	}
-//
-//	public void setEvents(List<Event> events) {
-//		this.events = events;
-//	}
-    
     
 }
